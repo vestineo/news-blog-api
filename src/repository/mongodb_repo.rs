@@ -23,7 +23,7 @@ impl MongoRepo {
             Err(_) => format!("Error loading env variable"),
         };
         let client = Client::with_uri_str(uri).await.unwrap();
-        let db = client.database("newsblogdb");
+        let db = client.database("news");
         let col: Collection<Post> = db.collection("Post");
         MongoRepo { col }
     }

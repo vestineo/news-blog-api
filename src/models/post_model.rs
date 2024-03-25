@@ -1,7 +1,10 @@
-use mongodb::bson::{oid::ObjectId, serde_helpers::bson_datetime_as_rfc3339_string, DateTime};
+use mongodb::bson::{
+    oid::ObjectId, serde_helpers::bson_datetime_as_rfc3339_string,
+    serde_helpers::serialize_bson_datetime_as_rfc3339_string, DateTime,
+};
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct JsonPost {
     #[serde(rename = "_id", skip_serializing_if = "Option::is_none")]
     pub id: Option<ObjectId>,
@@ -15,11 +18,12 @@ pub struct JsonPost {
     pub image: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Post {
     #[serde(rename = "_id", skip_serializing_if = "Option::is_none")]
     pub id: Option<ObjectId>,
     pub title: String,
+    #[serde(serialize_with = "serialize_bson_datetime_as_rfc3339_string")]
     pub date: DateTime,
     pub author: String,
     pub category: String,

@@ -3,9 +3,7 @@ use crate::{
     repository::mongodb_repo::MongoRepo,
 };
 use actix_web::{
-    get,
-    http::header::ContentType,
-    post,
+    get, post,
     web::{Data, Json, Path, Query},
     HttpRequest, HttpResponse, Responder,
 };
